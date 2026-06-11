@@ -1,7 +1,14 @@
-import React from "react";
-
+import React, { useState } from "react";
+import HeroChocolates from "./HeroChocolates";
+import FlavorCards from "./FlavorCards";
 const Hero = () => {
-  return <div>hhh</div>;
+  const [activeFlavores, setActiveFlavores] = useState("");
+  return (
+    <section className="choco-section inner-container">
+      <HeroChocolates activeFlavores={activeFlavores} />
+      <FlavorCards setActiveFlavores={setActiveFlavores} />
+    </section>
+  );
 };
 
 export default Hero;

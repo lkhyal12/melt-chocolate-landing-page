@@ -46,7 +46,7 @@ const Taste = () => {
           end: "+=600%",
           scrub: 1,
           pin: true,
-          anticipatePin: 1,
+          // anticipatePin: 1,
         },
       });
 

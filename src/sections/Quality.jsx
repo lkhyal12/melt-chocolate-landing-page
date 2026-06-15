@@ -10,30 +10,32 @@ const Quality = () => {
 
   useGSAP(
     () => {
-      cardsRef.current.forEach((card, idx) => {
-        gsap.set(card, {
-          y: "180%",
-          rotate: idx % 2 === 0 ? -10 : 10,
+      window.addEventListener("load", () => {
+        cardsRef.current.forEach((card, idx) => {
+          gsap.set(card, {
+            y: "180%",
+            rotate: idx % 2 === 0 ? -10 : 10,
+          });
         });
-      });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=300%",
-          scrub: true,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "+=300%",
+            scrub: true,
+            pin: true,
+            anticipatePin: 1,
+          },
+        });
 
-      tl.to(cardsRef.current, {
-        y: 0,
-        rotate: 0,
-        stagger: 1,
-        duration: 1,
-        ease: "power1.inOut",
+        tl.to(cardsRef.current, {
+          y: 0,
+          rotate: 0,
+          stagger: 1,
+          duration: 1,
+          ease: "power1.inOut",
+        });
       });
     },
     { scope: sectionRef },

@@ -18,59 +18,61 @@ const HeroChocolates = ({ activeFlavor }) => {
   useGSAP(
     () => {
       // heading text animation
-      SplitText.create("h1", {
-        type: "chars",
-        onSplit: (self) => {
-          gsap.from(self.chars, {
-            scale: 1.3,
-            opacity: 0,
-            stagger: 0.08,
-            ease: "power3.inOut",
-          });
-        },
-      });
+      window.addEventListener("load", () => {
+        SplitText.create("h1", {
+          type: "chars",
+          onSplit: (self) => {
+            gsap.from(self.chars, {
+              scale: 1.3,
+              opacity: 0,
+              stagger: 0.08,
+              ease: "power3.inOut",
+            });
+          },
+        });
 
-      gsap.from("h2", {
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.4,
-      });
+        gsap.from("h2", {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.4,
+        });
 
-      // images animation
-      gsap.from(".caremel-choco", {
-        y: "60%",
-        scale: 0.8,
-        duration: 1,
-        ease: "power3.inOut",
-      });
+        // images animation
+        gsap.from(".caremel-choco", {
+          y: "60%",
+          scale: 0.8,
+          duration: 1,
+          ease: "power3.inOut",
+        });
 
-      gsap.from(".cocoa-choco", {
-        y: "40%",
-        scale: 0.8,
-        duration: 1,
-        ease: "power3.inOut",
-      });
+        gsap.from(".cocoa-choco", {
+          y: "40%",
+          scale: 0.8,
+          duration: 1,
+          ease: "power3.inOut",
+        });
 
-      gsap.from(".orange-choco", {
-        y: "40%",
-        scale: 0.8,
-        duration: 1,
-        ease: "power3.out",
-      });
+        gsap.from(".orange-choco", {
+          y: "40%",
+          scale: 0.8,
+          duration: 1,
+          ease: "power3.out",
+        });
 
-      gsap.from(".almond-choco", {
-        y: "60%",
-        scale: 0.8,
-        duration: 1,
-        ease: "power3.out",
-      });
+        gsap.from(".almond-choco", {
+          y: "60%",
+          scale: 0.8,
+          duration: 1,
+          ease: "power3.out",
+        });
 
-      gsap.from(".stamp", {
-        scale: 2,
-        opacity: 0,
-        duration: 0.4,
-        delay: 1,
-        ease: "power3.inOut",
+        gsap.from(".stamp", {
+          scale: 2,
+          opacity: 0,
+          duration: 0.4,
+          delay: 1,
+          ease: "power3.inOut",
+        });
       });
     },
     { scope: heroSectionRef.current },

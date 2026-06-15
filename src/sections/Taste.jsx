@@ -16,195 +16,197 @@ const Taste = () => {
 
   useGSAP(
     () => {
-      SplitText.create("h2", {
-        type: "chars",
-        onSplit(self) {
-          gsap.from(self.chars, {
-            scale: 1.3,
-            opacity: 0,
-            stagger: 0.08,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: tasteRef.current,
-              start: "top bottom",
-              end: "center center",
-              scrub: 1,
-            },
-          });
-        },
-      });
-
-      gsap.set(".img-1", { visibility: "visible" });
-      gsap.set(".img-2", { visibility: "hidden" });
-      gsap.set(".img-3", { visibility: "hidden" });
-      gsap.set(".img-4", { visibility: "hidden" });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: tasteRef.current,
-          start: "top top",
-          end: "+=600%",
-          scrub: 1,
-          pin: true,
-          // anticipatePin: 1,
-        },
-      });
-
-      // 1️⃣ Smooth (already visible)
-      // tl.from(".text-1", { opacity: 0 });
-      const split1 = new SplitText(".text-1", { type: "chars" });
-      const split2 = new SplitText(".text-2", { type: "chars" });
-      const split3 = new SplitText(".text-3", { type: "chars" });
-      const split4 = new SplitText(".text-4", { type: "chars" });
-
-      // Arrow animation
-      const arrows = gsap.utils.toArray(
-        tasteRef.current.querySelectorAll(".arrow-path"),
-      );
-
-      arrows.forEach((path) => {
-        const length = path.getTotalLength();
-        gsap.set(path, {
-          strokeDasharray: length,
-          strokeDashoffset: length,
+      window.addEventListener("load", () => {
+        SplitText.create("h2", {
+          type: "chars",
+          onSplit(self) {
+            gsap.from(self.chars, {
+              scale: 1.3,
+              opacity: 0,
+              stagger: 0.08,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: tasteRef.current,
+                start: "top bottom",
+                end: "center center",
+                scrub: 1,
+              },
+            });
+          },
         });
+
+        gsap.set(".img-1", { visibility: "visible" });
+        gsap.set(".img-2", { visibility: "hidden" });
+        gsap.set(".img-3", { visibility: "hidden" });
+        gsap.set(".img-4", { visibility: "hidden" });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: tasteRef.current,
+            start: "top top",
+            end: "+=600%",
+            scrub: 1,
+            pin: true,
+            // anticipatePin: 1,
+          },
+        });
+
+        // 1️⃣ Smooth (already visible)
+        // tl.from(".text-1", { opacity: 0 });
+        const split1 = new SplitText(".text-1", { type: "chars" });
+        const split2 = new SplitText(".text-2", { type: "chars" });
+        const split3 = new SplitText(".text-3", { type: "chars" });
+        const split4 = new SplitText(".text-4", { type: "chars" });
+
+        // Arrow animation
+        const arrows = gsap.utils.toArray(
+          tasteRef.current.querySelectorAll(".arrow-path"),
+        );
+
+        arrows.forEach((path) => {
+          const length = path.getTotalLength();
+          gsap.set(path, {
+            strokeDasharray: length,
+            strokeDashoffset: length,
+          });
+        });
+
+        tl.to(".arrow-1", {
+          strokeDashoffset: 0,
+          duration: 1.2,
+          ease: "power1.inOut",
+        });
+
+        tl.to(
+          ".arrow-1",
+          {
+            fill: "#0D1927",
+            duration: 0.2,
+          },
+          "<+=0.4",
+        );
+
+        tl.from(
+          split1.chars,
+          {
+            visibility: "hidden",
+            stagger: {
+              each: 0.08,
+              ease: "power1.out",
+            },
+            duration: 0.6,
+          },
+          "<+=0.1",
+        );
+
+        // 2️⃣ Crunchy
+        tl.to(".img-1", { visibility: "hidden" });
+        tl.to(".img-2", { visibility: "visible" }, "<");
+
+        tl.to(
+          ".arrow-2",
+          {
+            strokeDashoffset: 0,
+            duration: 1.2,
+            ease: "power1.inOut",
+          },
+          "<+=0.3",
+        );
+
+        tl.to(
+          ".arrow-2",
+          {
+            fill: "#0D1927",
+            duration: 0.2,
+          },
+          "<+=0.4",
+        );
+
+        tl.from(
+          split2.chars,
+          {
+            visibility: "hidden",
+            stagger: {
+              each: 0.08,
+              ease: "power1.out",
+            },
+            duration: 0.6,
+          },
+          "<+=0.1",
+        );
+
+        // 3️⃣ Satisfying
+        tl.to(".img-2", { visibility: "hidden" });
+        tl.to(".img-3", { visibility: "visible" }, "<");
+
+        tl.to(
+          ".arrow-3",
+          {
+            strokeDashoffset: 0,
+            duration: 1.2,
+            ease: "power1.inOut",
+          },
+          "<+=0.3",
+        );
+
+        tl.to(
+          ".arrow-3",
+          {
+            fill: "#0D1927",
+            duration: 0.2,
+          },
+          "<+=0.4",
+        );
+
+        tl.from(
+          split3.chars,
+          {
+            visibility: "hidden",
+            stagger: {
+              each: 0.08,
+              ease: "power1.out",
+            },
+            duration: 0.6,
+          },
+          "<+=0.1",
+        );
+
+        // 4️⃣ Balanced
+        tl.to(".img-3", { visibility: "hidden" });
+        tl.to(".img-4", { visibility: "visible" }, "<");
+
+        tl.to(
+          ".arrow-4",
+          {
+            strokeDashoffset: 0,
+            duration: 1.2,
+            ease: "power1.inOut",
+          },
+          "<+=0.3",
+        );
+
+        tl.to(
+          ".arrow-4",
+          {
+            fill: "#0D1927",
+            duration: 0.2,
+          },
+          "<+=0.4",
+        );
+
+        tl.from(
+          split4.chars,
+          {
+            visibility: "hidden",
+            stagger: {
+              each: 0.08,
+              ease: "power1.out",
+            },
+            duration: 0.6,
+          },
+          "<+=0.1",
+        );
       });
-
-      tl.to(".arrow-1", {
-        strokeDashoffset: 0,
-        duration: 1.2,
-        ease: "power1.inOut",
-      });
-
-      tl.to(
-        ".arrow-1",
-        {
-          fill: "#0D1927",
-          duration: 0.2,
-        },
-        "<+=0.4",
-      );
-
-      tl.from(
-        split1.chars,
-        {
-          visibility: "hidden",
-          stagger: {
-            each: 0.08,
-            ease: "power1.out",
-          },
-          duration: 0.6,
-        },
-        "<+=0.1",
-      );
-
-      // 2️⃣ Crunchy
-      tl.to(".img-1", { visibility: "hidden" });
-      tl.to(".img-2", { visibility: "visible" }, "<");
-
-      tl.to(
-        ".arrow-2",
-        {
-          strokeDashoffset: 0,
-          duration: 1.2,
-          ease: "power1.inOut",
-        },
-        "<+=0.3",
-      );
-
-      tl.to(
-        ".arrow-2",
-        {
-          fill: "#0D1927",
-          duration: 0.2,
-        },
-        "<+=0.4",
-      );
-
-      tl.from(
-        split2.chars,
-        {
-          visibility: "hidden",
-          stagger: {
-            each: 0.08,
-            ease: "power1.out",
-          },
-          duration: 0.6,
-        },
-        "<+=0.1",
-      );
-
-      // 3️⃣ Satisfying
-      tl.to(".img-2", { visibility: "hidden" });
-      tl.to(".img-3", { visibility: "visible" }, "<");
-
-      tl.to(
-        ".arrow-3",
-        {
-          strokeDashoffset: 0,
-          duration: 1.2,
-          ease: "power1.inOut",
-        },
-        "<+=0.3",
-      );
-
-      tl.to(
-        ".arrow-3",
-        {
-          fill: "#0D1927",
-          duration: 0.2,
-        },
-        "<+=0.4",
-      );
-
-      tl.from(
-        split3.chars,
-        {
-          visibility: "hidden",
-          stagger: {
-            each: 0.08,
-            ease: "power1.out",
-          },
-          duration: 0.6,
-        },
-        "<+=0.1",
-      );
-
-      // 4️⃣ Balanced
-      tl.to(".img-3", { visibility: "hidden" });
-      tl.to(".img-4", { visibility: "visible" }, "<");
-
-      tl.to(
-        ".arrow-4",
-        {
-          strokeDashoffset: 0,
-          duration: 1.2,
-          ease: "power1.inOut",
-        },
-        "<+=0.3",
-      );
-
-      tl.to(
-        ".arrow-4",
-        {
-          fill: "#0D1927",
-          duration: 0.2,
-        },
-        "<+=0.4",
-      );
-
-      tl.from(
-        split4.chars,
-        {
-          visibility: "hidden",
-          stagger: {
-            each: 0.08,
-            ease: "power1.out",
-          },
-          duration: 0.6,
-        },
-        "<+=0.1",
-      );
     },
     { scope: tasteRef },
   );

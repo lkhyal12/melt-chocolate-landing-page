@@ -1,78 +1,75 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroChocolates from "./HeroChocolates";
 import FlavorCards from "./FlavorCards";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-import { useGSAP } from "@gsap/react";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const [activeFlavores, setActiveFlavores] = useState("");
-  const heroRef = useRef();
-  useGSAP(
-    () => {
-      window.addEventListener("load", () => {
-        const pairs = [
-          {
-            choco: document.querySelector(".caremel-choco"),
-            card: document.querySelector(".caramel-card"),
-          },
-          {
-            choco: document.querySelector(".cocoa-choco"),
-            card: document.querySelector(".cocoa-card"),
-          },
-          {
-            choco: document.querySelector(".orange-choco"),
-            card: document.querySelector(".orange-card"),
-          },
-          {
-            choco: document.querySelector(".almond-choco"),
-            card: document.querySelector(".almond-card"),
-          },
-        ];
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".choco-section",
-            start: "top top",
-            end: "70% center",
-            scrub: true,
-            // markers: true,
-            // pin: true,
-            invalidateOnRefresh: true,
-          },
-        });
+  const [activeFlavor, setActiveFlavor] = useState(null);
 
-        pairs.forEach(({ choco, card }) => {
-          tl.to(
-            choco,
-            {
-              x: () => {
-                const c = choco.getBoundingClientRect();
-                const t = card.getBoundingClientRect();
-                const calc = t.left + t.width / 2 - (c.left + c.width / 2);
-                return calc;
-              },
-              y: () => {
-                const c = choco.getBoundingClientRect();
-                const t = card.getBoundingClientRect();
-                const calc =
-                  t.top + t.height / 2 - (c.top + (c.height / 2) * 1.2);
-                return calc;
-              },
-              scale: 0.6,
-              ease: "none",
-            },
-            0,
-          );
-        });
-      });
-    },
-    { scope: heroRef.current },
-  );
+  useGSAP(() => {
+    const pairs = [
+      {
+        choco: document.querySelector(".caremel-choco"),
+        card: document.querySelector(".caramel-card"),
+      },
+      {
+        choco: document.querySelector(".cocoa-choco"),
+        card: document.querySelector(".cocoa-card"),
+      },
+      {
+        choco: document.querySelector(".orange-choco"),
+        card: document.querySelector(".orange-card"),
+      },
+      {
+        choco: document.querySelector(".almond-choco"),
+        card: document.querySelector(".almond-card"),
+      },
+    ];
+
+    const tl = gsap.timeline(
+      {
+        scrollTrigger: {
+          trigger: ".choco-section",
+          start: "top top",
+          end: "74% center",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      },
+      [],
+    );
+
+    pairs.forEach(({ choco, card }) => {
+      tl.to(
+        choco,
+        {
+          x: () => {
+            const c = choco.getBoundingClientRect();
+            const t = card.getBoundingClientRect();
+            return t.left + t.width / 2 - (c.left + c.width / 2);
+          },
+          y: () => {
+            const c = choco.getBoundingClientRect();
+            const t = card.getBoundingClientRect();
+            return t.top + t.height / 2 - (c.top + c.height * 0.68);
+          },
+          scale: 0.6,
+          ease: "none",
+        },
+        0,
+      );
+    });
+  });
+
   return (
-    <section ref={heroRef} className="choco-section inner-container">
-      <HeroChocolates activeFlavor={activeFlavores} />
-      <FlavorCards setActiveFlavore={setActiveFlavores} />
+    <section className="choco-section inner-container">
+      <HeroChocolates activeFlavor={activeFlavor} />
+      <FlavorCards setActiveFlavor={setActiveFlavor} />
     </section>
   );
 };

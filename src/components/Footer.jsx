@@ -19,7 +19,7 @@ const Footer = () => {
         },
       });
     },
-    { scope: footerRef.current },
+    { scope: footerRef },
   );
   return (
     <section
